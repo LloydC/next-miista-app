@@ -1,7 +1,7 @@
 import { useState, useEffect }  from 'react';
 import Pagination from './Pagination';
-
-import Product from '../components/Product';
+import Filters from './Filters';
+import Product from './Product';
 
 function ProductList({ products }){
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +22,7 @@ function ProductList({ products }){
        <>
           <h1 style={{marginLeft: '60px'}}>Product List</h1>
           <br/>
+          <Filters/>
           <Pagination
             productsPerPage={productsPerPage}
             totalProducts={products.length}

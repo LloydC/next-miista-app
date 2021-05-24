@@ -15,6 +15,11 @@ a {
   box-sizing: border-box;
 }
 
+.filters-container {
+  display: flex;
+  margin-left: 70px;
+}
+
 .products-container {
   display: flex;
   flex-wrap: wrap;
@@ -37,10 +42,93 @@ a {
 
 .pagination {
   display: flex;
+  margin-left: 10px;
 }
 
 .page-item {
   list-style: none;
   border: 1px solid black;
   margin-left: 20px;
+}
+
+.controls {
+  margin: 30px -10px;
+}
+.control {
+  position: relative;
+  float: left;
+  width: 33%;
+  padding: 0 10px;
+}
+@media (max-width: 600px) {
+  .control {
+    float: none;
+    width: auto;
+    margin: 0 0 15px 0;
+  }
+  .control.layout {
+    margin: 0;
+  }
+}
+.control-icon {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.control-field {
+  position: relative;
+  padding-left: 40px;
+  z-index: 1;
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons {
+  display: inline-block;
+  vertical-align: top;
+  line-height: inherit;
+  font-size: inherit;
+}
+
+select.form-control {
+  padding-right: 40px;
+  cursor: pointer;
+}
+select.form-control::-ms-expand {
+  display: none;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.form-control:focus {
+  outline: 0;
+  border-color: #4a9ff9;
 }
