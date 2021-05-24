@@ -18,17 +18,20 @@ function ProductList({ products }){
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
+
     return (
        <>
           <h1 style={{marginLeft: '60px'}}>Product List</h1>
           <br/>
-          <Filters/>
-          <Pagination
-            productsPerPage={productsPerPage}
-            totalProducts={products.length}
-            paginate={paginate}
-            />
-
+          <div>
+            <Filters/>
+            <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={products.length}
+                paginate={paginate}
+                />
+          </div>
+          
           <div className='products-container'>
             { currentProducts.map((product, i)=> 
                 <Product {...product} key={i}/>)

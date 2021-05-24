@@ -1,15 +1,15 @@
 import React from "react";
 
 // Select component.
-export const Select = ({ values, onChange }) => {
+const Select = ({ values, onChange }) => {
   return (
     <div className="control">
-      <div className="control-icon">
+      {/* <div className="control-icon">
         <i className="material-icons">&#xE152;</i>
       </div>
       <div className="select-arrow">
         <i className="material-icons">&#xE313;</i>
-      </div>
+      </div> */}
       <select
         className="control-field filter-field form-control"
         onChange={onChange}
@@ -24,3 +24,5 @@ export const Select = ({ values, onChange }) => {
     </div>
   );
 };
+
+export default Select;
