@@ -1,5 +1,7 @@
+// mydomain.com
+import ProductList from '../components/ProductList'
 function HomePage() {
-    return <h1>The Home Page</h1>
+    return <ProductList/>
 }
 
 export default HomePage;

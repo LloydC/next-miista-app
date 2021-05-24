@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.pagination{
+  display: 'flex';
+}
+
+.page-item{
+  list-style: none;
+}
