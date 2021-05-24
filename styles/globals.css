@@ -15,10 +15,32 @@ a {
   box-sizing: border-box;
 }
 
-.pagination{
-  display: 'flex';
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.page-item{
+.product {
+  margin-left: 63px;
+}
+
+.product-img {
+  width: 398px;
+  height: 398px;
+}
+
+.product-description {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.pagination {
+  display: flex;
+}
+
+.page-item {
   list-style: none;
+  border: 1px solid black;
+  margin-left: 20px;
 }

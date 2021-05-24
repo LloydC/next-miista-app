@@ -1,31 +1,38 @@
-import { useState }  from 'react';
+import { useState, useEffect }  from 'react';
 import Pagination from './Pagination';
-import products from '../miista-export.json';
+
 import Product from '../components/Product';
 
-function ProductList(){
+function ProductList({ products }){
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(20);
+
+    useEffect(()=>{
+
+    },[])
 
         // Get current products
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.data.allContentfulProductPage.edges.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
-        <>
-          <h1>Product List</h1>
+       <>
+          <h1 style={{marginLeft: '60px'}}>Product List</h1>
           <br/>
-          { currentProducts.map((product, i)=> 
-            <Product {...product} key={i}/>)
-          }
           <Pagination
             productsPerPage={productsPerPage}
-            totalProducts={products.data.allContentfulProductPage.edges.length}
+            totalProducts={products.length}
             paginate={paginate}
-        />
+            />
+
+          <div className='products-container'>
+            { currentProducts.map((product, i)=> 
+                <Product {...product} key={i}/>)
+            }
+           </div>
         </>
     )
 }
