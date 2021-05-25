@@ -1,7 +1,8 @@
 // import the list of filters to be rendered through an appropriate component
 // import the list of products using useState
 // build one/several functions that will be handling the filtering  of products 
-import {useState,  useCallback} from 'react';
+import { useCallback } from 'react';
+// import Select from 'react-select';
 import Select from './Select';
 
 // Return the filter method.
@@ -18,11 +19,7 @@ function useFilter(value, search) {
   );
 }
 
-const Filters = () => {
-  const [filter, setFilter] = useState({
-    search: "",
-    value: "all"
-  });
+const Filters = ({ filters, setFilters }) => {
 
 // Build a filter method.
 //   const handleLocationChange = (value) => {
@@ -48,15 +45,25 @@ const Filters = () => {
         <h4>Filters</h4>
         <br/>
         <div style={{display: 'flex'}}> 
+
           <Select
-            values={["All", "Red", "Blue", "Green"]}
-            onChange={e => setFilter({ ...filter, value: e.target.value })}
+            values={["Color", "White", "Brown", "Green"]}
+            onChange={e => setFilters({ ...filters, color: e.target.value === 'color' ? '' : e.target.value })}
+            // options={options}
           />
 
           <Select
-            values={["All", "Sandals", "Mid-Heels", "New Arrivals"]}
-            onChange={e => setFilter({ ...filter, value: e.target.value })}
+            values={["Category", "Flats", "Mules","Sandals", "Outlet","Mid-Heels", "New Arrivals"]}
+            onChange={e => setFilters({ ...filters, category: e.target.value === 'category' ? '' : e.target.value  })}
+            // options={options}
           />
+
+          <Select
+            values={["Price", "0-100", "100-500","500-1000"]}
+            onChange={e => setFilters({ ...filters, price: e.target.value === 'price' ? '' : e.target.value  })}
+            // options={options}
+          />
+
         </div>
     </div>
   );
