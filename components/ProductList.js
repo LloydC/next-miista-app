@@ -1,15 +1,16 @@
 import { useState, useEffect }  from 'react';
+import { useQuery } from "react-query";
 import Pagination from './Pagination';
 import Filters from './Filters';
 import Product from './Product';
 
-function ProductList({ products }){
-    const [productsList, setProductsList] = useState(products)
+function ProductList({ products }){    
+    const [productsList, setProductsList] = useState(products);
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(20);
     const [filters, setFilters] = useState({ category: "", color: "", price: ""});
     
-    const sortByColor = (productsFiltered) => { // Functional
+    const sortByColor = (productsFiltered) => {
         const selectedColor = filters.color;
 
         if(selectedColor !== ""){
@@ -22,7 +23,7 @@ function ProductList({ products }){
          }
     }
 
-    const sortByCategory = (productsFiltered) => { // Functional
+    const sortByCategory = (productsFiltered) => { 
         const selectedCategory = filters.category;
 
         if(selectedCategory !== ""){
@@ -33,9 +34,9 @@ function ProductList({ products }){
          else {
              return setProductsList(products);
          }
-    } //Functional
+    } 
 
-    const sortByPrice = (productsFiltered) => { //Functional
+    const sortByPrice = (productsFiltered) => {
         const priceRange = filters.price;
 
         if(priceRange === "0-100"){
@@ -55,9 +56,7 @@ function ProductList({ products }){
          }
     }
 
-    useEffect(()=>{
-        const { category, color, price } = filters;
-
+    const generalSort = (category, color, price ) => {
         if(price === "" && color === "" && category === ""){
             setProductsList(products)
         }
@@ -70,6 +69,12 @@ function ProductList({ products }){
         else if(category !== "" && price === "" && color === ""){
             sortByCategory(products)
         }
+    }
+
+    useEffect(()=>{
+        const { category, color, price } = filters;
+
+        generalSort(category, color, price)
         
     },[filters.category, filters.color, filters.price])
 
@@ -80,6 +85,13 @@ function ProductList({ products }){
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    // const {data, isLoading, error} = useQuery('products', async ()=> {
+    //     return await fetch(`http://localhost:3000/api/products`).then(res => res.json());
+    // })
+
+    // if(isLoading) return 'Loading...'
+    // if(error) return error.message
 
     return (
        <>
