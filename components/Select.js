@@ -1,6 +1,5 @@
 import React from "react";
 
-// Select component.
 const Select = ({ values, onChange }) => {
   return (
     <div className="control">

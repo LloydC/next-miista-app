@@ -49,8 +49,12 @@ a {
 
 .page-item {
   list-style: none;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin-left: 20px;
+}
+
+.page-link:hover{
+  cursor: pointer;
 }
 
 .controls {
