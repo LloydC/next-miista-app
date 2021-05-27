@@ -18,98 +18,77 @@ function ProductList({ products }){
     const paginate = pageNumber => setCurrentPage(pageNumber);
     
     const sortByColor = (selectedColor, productsFiltered) => {
-        console.log('products length', productsFiltered.length)
         if(selectedColor !== ""){
            const sorted = productsFiltered.filter(product => product.node?.colorFamily);
            const matchingProducts = sorted.filter(product => product.node.colorFamily[0].name.toLowerCase() === selectedColor.toLowerCase());
-           console.log('matchingProducts ', matchingProducts)
-           return setProductsList(matchingProducts);
+           return matchingProducts;
         }
-        //  else {
-        //      return setProductsList(products);
-        //  }
+
     }
 
     const sortByCategory = (selectedCategory, productsFiltered) => { 
-        console.log('products length', productsFiltered.length)
         if(selectedCategory !== ""){
             const getProductsWithCategories = productsFiltered.filter(product => product.node.categoryTags !== null);
-            console.log('getProductsWithCategories ', getProductsWithCategories);
             const matchingProducts = getProductsWithCategories.filter(product => product.node.categoryTags.find(category => category.toLowerCase() === selectedCategory.toLowerCase()));
-            console.log('matchingProducts ', matchingProducts)
-            return setProductsList(matchingProducts);
+            return matchingProducts;
         }
-        //  else {
-        //      return setProductsList(products);
-        //  }
     } 
 
     const sortByPrice = (priceRange, productsFiltered) => {
         console.log('products length', productsFiltered.length)
         if(priceRange === "0-100"){
            const sorted = productsFiltered.filter(product => Number(product.node.shopifyProductEu.variants.edges[0].node.price < 100));
-           console.log('price sort ', sorted);
-           return setProductsList(sorted);
+           return sorted;
         }
         else if(priceRange === "100-500"){
             const sorted = productsFiltered.filter(product => Number(product.node.shopifyProductEu.variants.edges[0].node.price) < 500 && Number(product.node.shopifyProductEu.variants.edges[0].node.price) > 100);
-            console.log('price sort ', sorted);
-            return setProductsList(sorted);
+            return sorted;
          }
         else if(priceRange === "500-1000"){
             const sorted = productsFiltered.filter(product => Number(product.node.shopifyProductEu.variants.edges[0].node.price) > 500 && Number(product.node.shopifyProductEu.variants.edges[0].node.price) < 1000);
             console.log('price sort ', sorted);
-            return setProductsList(sorted);
+            return sorted;
          }
-        //  else {
-        //      return setProductsList(products);
-        //  }
     }
 
     const sortFilters =  (category, color, price ) => {
         if(price === "" && color === "" && category === ""){
-            console.log('Fire 1')
             setProductsList(products)
         }
         else if(category !== "" && price !== "" && color !== ""){
-            console.log('Fire 2')
-            // setProductsList(products)
-            sortByCategory(category, products)
-            sortByColor(color, productsList)
-            sortByPrice(price, productsList)
+            const catSort = sortByCategory(category, products)
+            const colorSort = sortByColor(color, catSort)
+            const priceSort = sortByPrice(price, colorSort)
+            setProductsList(priceSort)
         }
         else if(color !== "" && price === "" && category === ""){
-            console.log('Fire 7')
-            sortByColor(color, products)
+            const colorSort = sortByColor(color, products)
+            setProductsList(colorSort)
         }
         else if(category !== "" && price === "" && color === ""){
-            console.log('Fire 8')
-            sortByCategory(category, products)
+            const catSort = sortByCategory(category, products)
+            setProductsList(catSort);
         }
         else if(price !== "" && color === "" && category === ""){
-            console.log('Fire 3')
-            sortByPrice(price, products)
+            const priceSort = sortByPrice(price, products)
+            setProductsList(priceSort)
         }
         else if(price !== "" && color !== "" && category === ""){
-            console.log('Fire 4')
-            // setProductsList(products)
-            sortByColor(color, productsList)
-            sortByPrice(price, products)
+            const colorSort = sortByColor(color, products)
+            const priceSort = sortByPrice(price, colorSort)
+            setProductsList(priceSort)
             
         }
         else if(category !== "" && price === "" && color !== ""){
-            console.log('Fire 6')
-            // setProductsList(products)
-            sortByCategory(category, products)
-            sortByColor(color, productsList)
+            const catSort = sortByCategory(category, products)
+            const colorSort = sortByColor(color, catSort)
+            setProductsList(colorSort)
         } 
         else if(price !== "" && color === "" && category !== ""){
-            console.log('Fire 5')
-            // setProductsList(products)
-            sortByPrice(price, products)
-            sortByCategory(category, productsList)
-        }
-         
+            const priceSort = sortByPrice(price, products)
+            const catSort = sortByCategory(category, priceSort)
+            setProductsList(catSort)
+        }   
     }
 
     useEffect( async ()=> {
@@ -118,12 +97,11 @@ function ProductList({ products }){
         
     },[filters.category, filters.color, filters.price])
 
- 
 
     return (
        <>
-          <h1 style={{marginLeft: '60px'}}>Product List</h1>
-          <br/>
+          <h1 style={{textAlign: 'center'}}>Product List</h1>
+          
           <div>
             <Filters filters={filters} setFilters={setFilters}/>
             <Pagination

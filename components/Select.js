@@ -4,12 +4,6 @@ import React from "react";
 const Select = ({ values, onChange }) => {
   return (
     <div className="control">
-      {/* <div className="control-icon">
-        <i className="material-icons">&#xE152;</i>
-      </div>
-      <div className="select-arrow">
-        <i className="material-icons">&#xE313;</i>
-      </div> */}
       <select
         className="control-field filter-field form-control"
         onChange={onChange}

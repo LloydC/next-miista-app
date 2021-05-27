@@ -56,9 +56,11 @@ a {
 .controls {
   margin: 30px -10px;
 }
+
 .control {
   padding: 0 10px;
 }
+
 @media (max-width: 600px) {
   .control {
     float: none;
@@ -69,6 +71,7 @@ a {
     margin: 0;
   }
 }
+
 .control-icon {
   position: absolute;
   left: 10px;
