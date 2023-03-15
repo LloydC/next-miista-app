@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const Select = ({ values, onChange }) => {
   return (
@@ -8,8 +9,8 @@ const Select = ({ values, onChange }) => {
         onChange={onChange}
         defaultValue={values[0]}
       >
-        {values.map((value, i) => (
-          <option key={i} value={value.toLowerCase()}>
+        {values.map((value) => (
+          <option key={uuidv4()} value={value.toLowerCase()}>
             {value}
           </option>
         ))}
