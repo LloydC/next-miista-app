@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
   const pageNumbers = [];
@@ -11,7 +12,7 @@ const Pagination = ({ productsPerPage, totalProducts, paginate }) => {
     <nav>
       <ul className='pagination'>
         {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
+          <li key={uuidv4()} className='page-item'>
             <button onClick={() => paginate(number)} href='#' className='page-link'>
               {number}
             </button>
