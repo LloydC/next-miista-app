@@ -2,7 +2,7 @@
 import ProductList from '../components/ProductList';
 import { useQuery } from "react-query";
 
- function HomePage() {
+ function HomePage({ products, categories }) {
     const { data, isLoading, error } = useQuery('products', async () => {
         return await fetch(`http://localhost:3000/api/products`).then(res => res.json());
     })
@@ -13,16 +13,16 @@ import { useQuery } from "react-query";
     return <ProductList products={data}/>
 }
 
-// export async function getStaticProps() {
-//     const products = await fetch(`http://localhost:3000/api/products`).then(res => res.json());
-//     const categories = products.map(product => {return {category: product.node.categoryTags}});
+export async function getStaticProps() {
+    const products = await fetch(`http://localhost:3000/api/products`).then(res => res.json());
+    const categories = products.map(product => {return {category: product.node.categoryTags}});
    
-//     return {
-//         props: {
-//             products,
-//             categories
-//         }
-//     };
-// }
+    return {
+        props: {
+            products,
+            categories
+        }
+    };
+}
 
 export default HomePage;

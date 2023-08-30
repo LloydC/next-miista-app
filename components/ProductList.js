@@ -1,4 +1,5 @@
 import { useState, useEffect }  from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Pagination from './Pagination';
 import Filters from './Filters';
 import Product from './Product';
@@ -81,9 +82,12 @@ function ProductList({ products }){
         }   
     }
 
-    useEffect( async ()=> {
-        const { category, color, price } = filters;
-        await sortFilters(category, color, price);
+    useEffect( () => {
+        async function sortData() {
+            const { category, color, price } = filters;
+            await sortFilters(category, color, price);
+        }
+        sortData()
     },[filters.category, filters.color, filters.price])
 
     return (
@@ -100,8 +104,8 @@ function ProductList({ products }){
           </div>
           
           <div className='products-container'>
-            { currentProducts.map((product, i)=> 
-                <Product {...product} key={i}/>)
+            { currentProducts.map((product)=> 
+                <Product {...product} key={uuidv4()}/>)
             }
             {currentProducts.length === 0 && <span style={{marginLeft: '60px'}}>There are no products that match your preferences</span>}
            </div>
